@@ -1,0 +1,93 @@
+
+      /* Estilo de fondo oscuro y texto blanco */
+      body {
+        /* Fondo negro */
+        background-color: #000;
+        font-family: "Arial", sans-serif;
+        margin-left: 56px;
+      }
+      /* Estilos Navbar y iconos */
+      .navbar {
+        background-color: #000;
+        min-height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .nav-link {
+        /* Texto blanco */
+        color: #fff !important;
+        font-size: 1.5rem;
+      }
+
+      .nav-link:hover {
+        /* Gris al pasar el ratón */
+        color: #d8d8d896 !important;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .nav-link:active {
+        /* Efecto de "presionar" al hacer clic */
+        transform: scale(0.7);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .nav-link.active {
+        /* Resaltar el ícono activo */
+        color: #030000 !important;
+        background: rgb(255, 255, 255) !important;
+      }
+
+      .nav-pills {
+        /* Asegurar que el texto del navbar esté centrado */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+      }
+      .nav-item:last-child {
+        margin-top: auto;
+        padding-bottom: 5px;
+      }
+
+      .icon_table{
+        color: #000 !important;
+      
+        /* flex-direction: column; */
+        
+      }
+      .icon_add{
+        color: #000 !important;
+        width: 30px;
+      }
+
+      .btn_table{
+        display: grid ;
+        
+        
+      }
+      
+      /* Estilo tabla */
+
+ /* Tabla */
+thead, h2 {
+
+  text-transform: uppercase; /* Encabezados en mayúsculas */
+}
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+    
