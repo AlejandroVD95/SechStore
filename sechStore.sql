@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `acceso` (
   `ip` varchar(15) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bd_tienda.acceso: ~82 rows (aproximadamente)
+-- Volcando datos para la tabla bd_tienda.acceso: ~83 rows (aproximadamente)
 REPLACE INTO `acceso` (`email`, `password`, `fecha`, `correcto`, `ip`, `id`) VALUES
 	(NULL, NULL, '2024-12-16 18:23:09', 1, NULL, 1),
 	('123', NULL, '2024-12-18 20:01:56', 1, '::1', 2),
@@ -120,7 +120,10 @@ REPLACE INTO `acceso` (`email`, `password`, `fecha`, `correcto`, `ip`, `id`) VAL
 	('123', '123', '2025-01-22 15:51:28', 1, '::1', 86),
 	('123', '123', '2025-01-23 18:29:42', 1, '::1', 87),
 	('123', '123', '2025-02-05 18:31:58', 1, '::1', 88),
-	('123', '123', '2025-02-06 15:53:12', 1, '::1', 89);
+	('123', '123', '2025-02-06 15:53:12', 1, '::1', 89),
+	('123', '123', '2025-02-11 15:47:24', 1, '::1', 90),
+	('123', '123', '2025-02-11 18:43:00', 1, '::1', 91),
+	('123', '1233', '2025-02-11 19:16:39', 1, '::1', 92);
 
 -- Volcando estructura para tabla bd_tienda.categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
@@ -134,6 +137,24 @@ REPLACE INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
 	(1, 'hombre'),
 	(2, 'mujer');
 
+-- Volcando estructura para tabla bd_tienda.detalles_pedido
+CREATE TABLE IF NOT EXISTS `detalles_pedido` (
+  `id_pedido` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  KEY `FK__pedidos` (`id_pedido`),
+  KEY `FK_detalles_pedidos_productos` (`id_producto`),
+  CONSTRAINT `FK__pedidos` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_detalles_pedidos_productos` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla bd_tienda.detalles_pedido: ~5 rows (aproximadamente)
+REPLACE INTO `detalles_pedido` (`id_pedido`, `id_producto`) VALUES
+	(3, 8),
+	(4, 6),
+	(4, 13),
+	(5, 3),
+	(5, 3);
+
 -- Volcando estructura para tabla bd_tienda.fotos
 CREATE TABLE IF NOT EXISTS `fotos` (
   `url` varchar(100) DEFAULT NULL,
@@ -142,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `fotos` (
   CONSTRAINT `FK_fotos_productos` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bd_tienda.fotos: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla bd_tienda.fotos: ~15 rows (aproximadamente)
 REPLACE INTO `fotos` (`url`, `id_producto`) VALUES
 	('IMG/HOMBRE/2.jpg', 2),
 	('IMG/HOMBRE/3.jpg', 3),
@@ -159,6 +180,23 @@ REPLACE INTO `fotos` (`url`, `id_producto`) VALUES
 	('IMG/MUJER/67a4d7461b69d_14.jpg', 14),
 	('IMG/MUJER/67a4d74bc7321_15.jpg', 15),
 	('IMG/HOMBRE/67a4d838db71a_16.jpg', 28);
+
+-- Volcando estructura para tabla bd_tienda.pedidos
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `total` decimal(20,0) NOT NULL DEFAULT 0,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `email_usuario` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_pedidos_usuario` (`email_usuario`) USING BTREE,
+  CONSTRAINT `FK_pedidos_usuario` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla bd_tienda.pedidos: ~3 rows (aproximadamente)
+REPLACE INTO `pedidos` (`id`, `total`, `fecha`, `email_usuario`) VALUES
+	(3, 45, '2025-02-11 18:17:21', '123'),
+	(4, 145, '2025-02-11 18:18:05', '123'),
+	(5, 60, '2025-02-11 18:34:31', '123');
 
 -- Volcando estructura para tabla bd_tienda.productos
 CREATE TABLE IF NOT EXISTS `productos` (
@@ -196,7 +234,7 @@ REPLACE INTO `productos` (`id`, `nombre`, `categoria`, `desc_corta`, `desc_larga
 CREATE TABLE IF NOT EXISTS `usuario` (
   `nombre` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `telef` varchar(9) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `cp` varchar(5) DEFAULT '',
@@ -205,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bd_tienda.usuario: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla bd_tienda.usuario: ~4 rows (aproximadamente)
 REPLACE INTO `usuario` (`nombre`, `password`, `email`, `telef`, `direccion`, `cp`, `provincia`, `rol`) VALUES
 	('garen', '123', '123', '123', '123', '123', '123', '1'),
 	('123123', '', '2222dfjdf@gm.com', '234', 'undefined', '23423', '234', '1'),
