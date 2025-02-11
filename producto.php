@@ -64,6 +64,7 @@ if ($categoria !== 'ofertas') {
             </div>
         </div>
     </section>
+    <script src="logica/carrito.js"></script>
 
     <?php include('partials/footer.php'); ?>
 </body>

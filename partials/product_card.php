@@ -10,10 +10,10 @@
         </div>
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center p-1">
-                <a class="btn btn-dark mt-auto" href="#">Añadir al carrito</a>
+                <a class="btn btn-dark mt-auto" onclick="agregarAlCarritoFetch(<?= $producto['id'] ?>, '<?= $producto['nombre'] ?>', <?= $producto['precio'] ?>)">Añadir al carrito</a>
             </div>
             <div class="text-center">
-                <a class="btn btn-light btn-sm" data-bs-toggle="modal" href="#productoModal<?= $producto['id'] ?>">Detalles</a>
+                <a class="btn btn-light btn-sm" data-bs-toggle="modal" href="#productoModal<?= $producto['id'] ?>" >Detalles</a>
             </div>
         </div>
     </div>

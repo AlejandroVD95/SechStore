@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($result) {
                 $_SESSION['nombre'] = $result['nombre'];
                 $_SESSION['rol'] = $result['rol'];
+                $_SESSION['email'] = $result['email'];
                 $_SESSION['login'] = true;
                 
 

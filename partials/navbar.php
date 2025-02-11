@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 if (isset($_SESSION['login'])) {
     $haylogin = $_SESSION['login'];
     $admin = $_SESSION['rol'];
@@ -10,8 +7,9 @@ if (isset($_SESSION['login'])) {
     $haylogin = false;
 }
 
-?>
+$carrito_count = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
 
+?>
 
 <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
     <div class="container">
@@ -50,21 +48,24 @@ if (isset($_SESSION['login'])) {
                     <li class="nav-item"><a class="nav-link" href="producto.php?categoria=2">Mujer</a></li>
                     <li class="nav-item"><a class="nav-link" href="producto.php?categoria=ofertas">Ofertas</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.php">Contacto</a></li>
-
                     <?php if ($admin == 1) { ?>
-                        <li class="nav-item"><a class="nav-link" href="admin/panel.php">Administrar web </a></li>
-                    <?php  } ?>
-                    <li class="nav-item"><a class="nav-link"><?= $_SESSION['nombre'] ?> </a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="logica/logout.php">Cerrar Sesion</a></li>
-
+                        <li class="nav-item"><a class="nav-link" href="admin/panel.php">Administrar web</a></li>
+                    <?php } ?>
+                    <li class="nav-item"><a class="nav-link" href="pedidos.php"><?= $_SESSION['nombre'] ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logica/logout.php">Cerrar Sesión</a></li>
                 <?php
                             }
                 ?>
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#cart"></use>
-                </svg>
-                </a></li>
+                <li class="nav-item">
+                    <a class="nav-link position-relative" href="carrito.php">
+                        <i class="bi bi-cart3" style="font-size: 1.2rem;"></i>
+                        <span id="carrito-count"
+                            class="position-absolute top-60 start-100 translate-middle badge bg-danger"
+                            style="font-size: 0.7rem; padding: 0.25rem 0.4rem; border-radius: 50%;">
+                            <?= $carrito_count ?>
+                        </span>
+                    </a>
+                </li>
                 </ul>
             </div>
         </div>
