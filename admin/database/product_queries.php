@@ -357,13 +357,20 @@ function deleteCategoria($pdo) {
 
 function getPedidos($pdo)
 {
-    // Consulta SQL para obtener todos los pedidos de la base de datos
     $sql = 'SELECT * FROM pedidos';
-
-    // Ejecutamos la consulta
     $stmt = $pdo->query($sql);
-    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    // Retornamos los resultados
+function getPedidosModal($pdo, $id)
+{
+    $sql = 'SELECT p.id, p.nombre, p.precio, f.url
+              FROM detalles_pedido dp
+              JOIN productos p ON dp.id_producto = p.id
+         LEFT JOIN fotos f ON f.id_producto = p.id
+             WHERE dp.id_pedido = :id_pedido';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id_pedido', $id, PDO::PARAM_INT);
+    $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

@@ -4,14 +4,10 @@ const btnCategorias = document.getElementById('btn-categorias');
 const btnUsuarios = document.getElementById('btn-usuarios');
 const btnPedidos = document.getElementById('btn-pedidos');
 
-console.log(btnPedidos);
-
 const panelProductos = document.getElementById('panel-productos');
 const panelCategorias = document.getElementById('panel-categorias');
 const panelUsuarios = document.getElementById('panel-usuarios');
 const panelPedidos = document.getElementById('panel-pedidos');
-
-console.log(panelPedidos);
 
 // Función para ocultar todos los paneles
 function hideAllPanels() {
