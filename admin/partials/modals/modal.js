@@ -116,3 +116,35 @@ if (userModalUpdate) {
         document.getElementById('modalUpdateUserRol').value = rolUsuario;
     });
 }
+
+// Evento para cuando se muestra el modal de detalles del pedido
+const pedidosModalView = document.getElementById('pedidosModalView');
+
+// Verifica si el modal existe antes de añadir el evento
+if (pedidosModalView) {
+    pedidosModalView.addEventListener('show.bs.modal', event => {
+        // Obtiene el botón que activó el modal
+        const botonVerDetalles = event.relatedTarget;
+        
+        // Extrae los datos del pedido desde los atributos 'data-bs-*' del botón
+        const pedidoId = botonVerDetalles.getAttribute('data-bs-id');
+        const pedidoEmail = botonVerDetalles.getAttribute('data-bs-email');
+        const pedidoFecha = botonVerDetalles.getAttribute('data-bs-fecha');
+        const pedidoTotal = botonVerDetalles.getAttribute('data-bs-total');
+        
+        // Recupera la URL de la foto desde el campo oculto
+        const urlFoto = document.getElementById(`url${pedidoId}`).value;
+
+        // Asigna los valores a los elementos del modal
+        document.getElementById('pedidoModalTitle').innerText = `Detalles del Pedido #${pedidoId}`;
+        document.getElementById('pedidoTotal').innerText = `Total: ${pedidoTotal}€`;
+        document.getElementById('pedidoEmail').innerText = `Email del Usuario: ${pedidoEmail}`;
+        document.getElementById('pedidoFecha').innerText = `Fecha: ${pedidoFecha}`;
+        
+        // Asignar la URL de la foto
+        const imagenProducto = document.getElementById('pedidoImagen');
+        if (imagenProducto) {
+            imagenProducto.src = urlFoto;  // Establece la URL de la foto en el modal
+        }
+    });
+}

@@ -1,6 +1,13 @@
 <?php include 'partials/modals/product_modal_borrar.php' ?>
 <?php include 'modals/product_modal_update.php' ?>
 <?php include 'modals/product_modal_insert.php' ?>
+<?php
+try {
+    $productos = getProductos($pdo);
+} catch (PDOException $e) {
+    die('Error al conectar con la base de datos: ' . $e->getMessage());
+}
+?>
 <div class="header-container d-flex bg-white p-3">
     <h2 class="h2 flex-grow-1 text-center bg-white">Productos</h2>
     <a href="#productModalInsert" data-bs-toggle="modal" class="nav-link ms-auto p-2">

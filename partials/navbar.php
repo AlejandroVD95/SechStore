@@ -60,7 +60,7 @@ $carrito_count = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                     <a class="nav-link position-relative" href="carrito.php">
                         <i class="bi bi-cart3" style="font-size: 1.2rem;"></i>
                         <span id="carrito-count"
-                            class="position-absolute top-60 start-100 translate-middle badge bg-danger"
+                            class="position-absolute top-60 start-100 translate-middle badge bg-light text-dark"
                             style="font-size: 0.7rem; padding: 0.25rem 0.4rem; border-radius: 50%;">
                             <?= $carrito_count ?>
                         </span>

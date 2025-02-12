@@ -18,9 +18,15 @@
                 <i class="bi bi-person"></i>
             </a>
         </li>
+         <!-- Botón Pedidos -->
+         <li class="nav-item">
+            <a href="#" class="nav-link" id="btn-pedidos">
+                <i class="bi bi-boxes"></i> 
+            </a>
+        </li>
         <!-- Botón Salir -->
         <li class="nav-item">
-            <a href="/7PHPSQL/examen-refactor/main.php" class="nav-link" id="btn-salir">
+            <a href="/7PHPSQL/SechStore/main.php" class="nav-link" id="btn-salir">
                 <i class="bi bi-box-arrow-left"></i>
             </a>
         </li>

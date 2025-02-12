@@ -350,3 +350,20 @@ function deleteCategoria($pdo) {
     }
     header('Location: /7PHPSQL/examen-refactor/admin/panel.php');
 }
+
+// FUNCIONES PARA PEDIDOS
+
+// Obtener todas los pedidos
+
+function getPedidos($pdo)
+{
+    // Consulta SQL para obtener todos los pedidos de la base de datos
+    $sql = 'SELECT * FROM pedidos';
+
+    // Ejecutamos la consulta
+    $stmt = $pdo->query($sql);
+    $stmt->execute();
+
+    // Retornamos los resultados
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

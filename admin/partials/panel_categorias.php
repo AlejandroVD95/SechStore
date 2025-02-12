@@ -1,6 +1,14 @@
 <?php include 'partials/modals/cat_modal_borrar.php' ?>
 <?php include 'partials/modals/cat_modal_update.php' ?>
 <?php include 'partials/modals/cat_modal_insert.php' ?>
+
+<?php
+try {
+  $categorias = getCategorias($pdo);
+} catch (PDOException $e) {
+  die('Error al conectar con la base de datos: ' . $e->getMessage());
+}
+?>
 <div class="header-container d-flex bg-white p-3">
     <h2 class="h2 flex-grow-1 text-center bg-white">Categorias</h2>
     <a class="nav-link ms-auto p-2">

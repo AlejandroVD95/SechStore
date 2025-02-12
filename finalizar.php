@@ -45,6 +45,6 @@ try {
 <body>
     <h1 style="margin-top: 2em;">¡Gracias por tu compra!</h1>
     <p>Tu pedido ha sido registrado.</p>
-    <a href="producto.php" class="btn btn-primary" >Volver a la tienda</a>
+    <a href="main.php" class="btn btn-primary" >Volver a la tienda</a>
 </body>
 </html>

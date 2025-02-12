@@ -1,6 +1,14 @@
 <?php include 'partials/modals/user_modal_borrar.php' ?>
 <?php include 'partials/modals/user_modal_update.php' ?>
 <?php include 'partials/modals/user_modal_insert.php' ?>
+
+<?php
+try {
+    $usuarios = getUsuarios($pdo);
+} catch (PDOException $e) {
+    die('Error al conectar con la base de datos: ' . $e->getMessage());
+}
+?>
 <div class="header-container d-flex bg-white p-3">
     <h2 class="h2 flex-grow-1 text-center bg-white">Usuarios</h2>
     <a href="#userModalInsert" data-bs-toggle="modal" class="nav-link ms-auto p-2">
@@ -28,7 +36,7 @@
         <?php else: ?>
             <?php foreach ($usuarios as $usuario): ?>
                 <tr>
-                    
+
                     <td id="rol_<?= $usuario['email'] ?>"><?= $usuario['rol'] ?></td>
                     <td id="<?= $usuario['email'] ?>"><?= $usuario['email'] ?></td>
                     <td id="nombre<?= $usuario['email'] ?>"><?= $usuario['nombre'] ?></td>
@@ -54,5 +62,3 @@
         <?php endif; ?>
     </tbody>
 </table>
-
-

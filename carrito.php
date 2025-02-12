@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION["carrito"])) {
+    $_SESSION["carrito"] = [];
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['nombre'], $_POST['precio'])) {
     $producto = [
@@ -24,6 +28,7 @@ if (isset($_GET['eliminar'])) {
 $total = array_sum(array_column($_SESSION['carrito'], 'precio'));
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <?php include('partials/head.php') ?>
@@ -33,34 +38,39 @@ $total = array_sum(array_column($_SESSION['carrito'], 'precio'));
 
     <main class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
         <div class="card shadow-lg" style="width: 100%; max-width: 400px; border-radius: 15px;">
-            <div class="card-body">
+            <div class="card-body" style="max-height: 60vh; overflow-y: auto;">
                 <h5 class="card-title text-center mb-4">Carrito</h5>
-                    <table class='table'>
+                <table class="table table-bordered text-center align-middle">
+                    <thead>
                         <tr>
-                            <th>Producto</th>
+                            <th>Nombre</th>
                             <th>Precio</th>
                             <th>Acción</th>
                         </tr>
-                        <?php foreach ($_SESSION['carrito'] as $i => $produc) { ?>
+                    </thead>
+                    <tbody>
 
-                            <?php if (!isset($_SESSION['carrito']) || count($_SESSION['carrito']) === 0) { ?>
-                                <p>El carrito está vacío.</p>
-                                exit;
-                            <?php } else { ?>
+                        <?php if (!isset($_SESSION['carrito']) || count($_SESSION['carrito']) === 0) { ?>
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <p>El carrito está vacío.</p>
+                                </td>
+                            </tr>
+                        <?php } else { ?>
+                            <?php foreach ($_SESSION['carrito'] as $i => $produc) { ?>
                                 <tr>
-                                    <td><?= $produc['nombre'] ?></td>
-                                    <td><?= $produc['precio'] ?>€</td>
+                                    <td><?= htmlspecialchars($produc['nombre']) ?></td>
+                                    <td><?= htmlspecialchars($produc['precio']) ?>€</td>
                                     <td><a href="carrito.php?eliminar=<?= $i ?>">Eliminar</a></td>
                                 </tr>
                             <?php } ?>
-                            <tr>
-                                <td></td>
-                            </tr>
                         <?php } ?>
-                    </table>
-                    <form method="post" action="finalizar.php">
-                        <button class="btn btn-dark w-100 py-2" type="submit">Finalizar Compra</button>
-                    </form>
+
+                    </tbody>
+                </table>
+                <form method="post" action="finalizar.php">
+                    <button class="btn btn-dark w-100 py-2" type="submit">Finalizar Compra</button>
+                </form>
             </div>
         </div>
     </main>
